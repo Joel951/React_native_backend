@@ -3,18 +3,24 @@ const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 const crypto = require('crypto')
 const nodemailer = require('nodemailer');
+const dotenv = require('dotenv')
 
+dotenv.config();
 const app = express();
-const port = 8000;
+const port = process.env.PORT || 3000;
 const cors = require('cors');
 app.use(cors());
+
+
 
 app.use(bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json());
 const jwt = require('jsonwebtoken');
 
 
-mongoose.connect("mongodb+srv://joel:joel@cluster0.tb9g0u4.mongodb.net/", {
+//mongoose.connect()
+
+mongoose.connect(process.env.MONGODB_URL, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
 }).then(() => {
@@ -255,7 +261,7 @@ app.get("/orders/:userId", async (req, res) => {
     try {
         const userId = req.params.userId;
 
-        const orders = await Order.find({ user: userId }).populate("user"); 
+        const orders = await Order.find({ user: userId }).populate("user");
 
         if (!orders || orders.length === 0) {
             return res.status(404).json({ message: "No orders found for this user" })
