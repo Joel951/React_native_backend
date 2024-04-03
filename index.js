@@ -14,10 +14,7 @@ app.use(bodyParser.json());
 const jwt = require('jsonwebtoken');
 
 
-mongoose.connect("mongodb+srv://joel:joel@cluster0.tb9g0u4.mongodb.net/", {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-}).then(() => {
+mongoose.connect("mongodb+srv://joel:joel@atlascluster.lovopuq.mongodb.net/").then(() => {
     console.log("Connected to Mongo");
 }).catch((err) => {
     console.log(err);
@@ -41,8 +38,8 @@ const sendVerificationEmail = async (email, verificationToken) => {
         service: "gmail",
         auth: {
             user: "joeljames951@gmail.com",
-            pass: "bxshkxuxaixhtkea"
-        }
+            pass: "gyyzhrzxxrsjuqiw"
+        }          
     })
 
     // compose the email message
